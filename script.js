@@ -46,5 +46,10 @@ Functions to avoid global variables.
 
 
 */
-
-
+(function() {
+	angular.module("appName", []).controller("MainController", MainController);
+	MainController.$inject = ["$scope"];
+	function MainController($scope){
+		$scope.message = "Hello, angular";
+	}
+})();
