@@ -18,6 +18,14 @@ dowork(work);
 
 REVEALING MODULE PATTERNS: Functions to build modules.
 
+# Do not make global variables, They are downright evil.
+
+Functions to avoid global variables.
+
+
+*/
+
+var program = function() {
 var createWorker = function(){
 
 	var task1 = function(){
@@ -36,11 +44,5 @@ var createWorker = function(){
 var worker = createWorker();
 worker.job1();
 worker.job2();
-
-Functions to avoid global variables.
-
-
-*/
-
-
-
+};
+program();
