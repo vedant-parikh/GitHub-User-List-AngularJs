@@ -9,5 +9,8 @@
   <body ng-controller = "MainController">
     <h1>{{message}}</h1>
     <h3>{{message.length}}</h3>
+    <div>firstname: {{person.firstname}}</div>
+    <div>lastname: {{person.lastname}}</div>
+    <div><img ng-src="{{person.imageSrc}}" title="{{person.firstname}} {{person.lastname}}"></div>
   </body>
 </html>

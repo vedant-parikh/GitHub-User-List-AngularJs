@@ -50,6 +50,13 @@ Functions to avoid global variables.
 	angular.module("appName", []).controller("MainController", MainController);
 	MainController.$inject = ["$scope"];
 	function MainController($scope){
+		var person = {
+			firstname: "Vedant",
+			lastname: "Parikh",
+			imageSrc: "http://img2.timeinc.net/people/i/2015/news/151123/priyanka-1024.jpg" 
+		};
+
 		$scope.message = "Hello, angular";
+		$scope.person = person;
 	}
 })();
