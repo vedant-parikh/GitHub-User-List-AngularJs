@@ -68,7 +68,7 @@ Functions to avoid global variables.
 		$scope.search = function(username) {
 			$http.get("https://api.github.com/users/" + username).then(onUserComplete, onError);
 		}
-		
+		$scope.repoOrderBy = "+stargazers_count";
 		$scope.message = "Github Viewer";
 		$scope.username = "Angular";
 	}

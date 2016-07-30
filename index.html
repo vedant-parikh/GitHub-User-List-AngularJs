@@ -17,6 +17,12 @@
     <h5>{{user.company}}</h5>
     <h5><a href="{{user.html_url}}">Github URL</a></h5>
     <div><img ng-src="{{user.avatar_url}}" title="{{user.name}}" height="80" width="80"></div>
+    Order:
+    <select ng-model="repoOrderBy">
+    	<option value="+name">Name</option>
+    	<option value="-stargazers_count">Stars</option>
+    	<option value="+language">Language</option>
+    </select>
     <table>
     	<thead>
     		<tr>
@@ -26,7 +32,7 @@
     		</tr>
     	</thead>
     	<tbody>
-    		<tr ng-repeat="repo in repos">
+    		<tr ng-repeat="repo in repos | orderBy: repoOrderBy">
     			<td>{{repo.name}}</td>
     			<td>{{repo.stargazers_count | number}}</td>
     			<td>{{repo.language}}</td>
