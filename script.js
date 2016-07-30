@@ -48,15 +48,18 @@ Functions to avoid global variables.
 */
 (function() {
 	angular.module("appName", []).controller("MainController", MainController);
-	MainController.$inject = ["$scope"];
-	function MainController($scope){
-		var person = {
-			firstname: "Vedant",
-			lastname: "Parikh",
-			imageSrc: "http://img2.timeinc.net/people/i/2015/news/151123/priyanka-1024.jpg" 
-		};
+	MainController.$inject = ["$scope","$http"];
+	function MainController($scope, $http){
 
+		var onUserComplete = function(response){
+			$scope.user = response.data
+		}
+
+		var onError = function(reason){
+			$scope.error = "Could not fetch the screen"
+		}
+
+		$http.get("https://api.github.com/users/vedant-parikh").then(onUserComplete, onError);
 		$scope.message = "Hello, angular";
-		$scope.person = person;
 	}
 })();
