@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="appName">
+<html ng-app="githubViewer">
 
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
@@ -7,11 +7,31 @@
     <script src="script.js"></script>
   </head>
   <body ng-controller = "MainController">
+  <form name= "SearchUser" ng-submit="search(username)">
+  <input type="search" required placeholder="Username to find" ng-model = "username"/>
+  <input type="submit" name="Search">
+  </form>
     <h1>{{message}}</h1>
-    <h3>{{message.length}}</h3>
     <div>{{error}}</div>
-    <div>{{user.name}}</div>
-    <div>{{user.company}}</div>
-    <div><img ng-src="{{user.avatar_url}}" title="{{user.name}}"></div>
+    <h3>{{user.name}}</h3>
+    <h5>{{user.company}}</h5>
+    <h5><a href="{{user.html_url}}">Github URL</a></h5>
+    <div><img ng-src="{{user.avatar_url}}" title="{{user.name}}" height="80" width="80"></div>
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Name</th>
+    			<th>Stars</th>
+    			<th>Language</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr ng-repeat="repo in repos">
+    			<td>{{repo.name}}</td>
+    			<td>{{repo.stargazers_count | number}}</td>
+    			<td>{{repo.language}}</td>
+    		</tr>
+    	</tbody>
+    </table>
   </body>
 </html>

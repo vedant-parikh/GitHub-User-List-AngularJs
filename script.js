@@ -47,19 +47,29 @@ Functions to avoid global variables.
 
 */
 (function() {
-	angular.module("appName", []).controller("MainController", MainController);
-	MainController.$inject = ["$scope","$http"];
+	angular.module("githubViewer", []).controller("MainController", ["$scope", "$http", MainController]);
+	//MainController.$inject = ["$scope","$http"];
 	function MainController($scope, $http){
 
 		var onUserComplete = function(response){
-			$scope.user = response.data
+			$scope.user = response.data;
+			$http.get($scope.user.repos_url).then(onRepos, onReposError);
 		}
 
 		var onError = function(reason){
-			$scope.error = "Could not fetch the screen"
+			$scope.error = "Could not fetch the user"
 		}
-
-		$http.get("https://api.github.com/users/vedant-parikh").then(onUserComplete, onError);
-		$scope.message = "Hello, angular";
+		var onRepos = function(response){
+			$scope.repos = response.data;
+		}
+		var onReposError = function(reason){
+			$scope.error = "Could not fetch the Repository"
+		}
+		$scope.search = function(username) {
+			$http.get("https://api.github.com/users/" + username).then(onUserComplete, onError);
+		}
+		
+		$scope.message = "Github Viewer";
+		$scope.username = "Angular";
 	}
 })();
