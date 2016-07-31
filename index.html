@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="githubViewer">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-    <script src="github.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="MainController.js"></script>
+    <script src="github.js"></script> 
   </head>
-  <body ng-controller = "MainController">
-  <h1>{{message}}</h1>
-  <h3 ng-hide="!countdown">Search user before {{countdown}} </h3>
-  <form name= "SearchUser" ng-submit="search(username)">
-  <input type="search" required placeholder="Username to find" ng-model = "username"/>
-  <input type="submit" name="Search">
-  </form>
-  <div ng-include="'user_details.html'" ng-show="user"></div>
+  <body>
+    <h1>Github Viewer</h1>
+    <div ng-view></div>
   </body>
 </html>
