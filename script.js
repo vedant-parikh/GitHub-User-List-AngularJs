@@ -46,21 +46,24 @@ Functions to avoid global variables.
 */
 
 (function() {
-	angular.module("githubViewer", []).controller("MainController", ["$scope", "$http", "$interval", "$log", MainController]);
+	var app = 	angular.module("githubViewer", []);
 	//MainController.$inject = ["$scope","$http"];
-	function MainController($scope, $http, $interval, $log){
+	
+	var MainController = function($scope, github, $interval, $log, $location, $anchorScroll){
 		
-		var onUserComplete = function(response){
-			$scope.user = response.data;
-			$http.get($scope.user.repos_url).then(onRepos, onReposError);
+		var onUserComplete = function(data){
+			$scope.user = data;
+			github.getRepos($scope.user).then(onRepos, onReposError);
 		}
 		
 		var onError = function(reason){
 			$scope.error = "Could not fetch the user"
 		}
 		
-		var onRepos = function(response){
-			$scope.repos = response.data;
+		var onRepos = function(data){
+			$scope.repos = data;
+			$location.hash("userDetails");
+			$anchorScroll();
 		}
 		
 		var onReposError = function(reason){
@@ -81,7 +84,7 @@ Functions to avoid global variables.
 		
 		$scope.search = function(username) {
 			$log.info("searching for " + username);
-			$http.get("https://api.github.com/users/" + username).then(onUserComplete, onError);
+			github.getUser(username).then(onUserComplete, onError);
 			if(countdownInterval){
 				$interval.cancel(countdownInterval);
 				$scope.countdown = null;
@@ -95,4 +98,6 @@ Functions to avoid global variables.
 		
 		startCountdown();
 	}
+	app.controller("MainController", MainController);
+
 })();
