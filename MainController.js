@@ -20,10 +20,12 @@
 				$interval.cancel(countdownInterval);
 				$scope.countdown = null;
 			}
+			$location.path("/user/" + username);
 		}
+
 		
 		$scope.username = "Angular";
-		$scope.countdown = 5;
+		$scope.countdown = 15;
 		startCountdown();
 	}
 	app.controller("MainController", MainController);

@@ -1,4 +1,4 @@
-<div id = "userDetails">
+<div>
     <div>{{error}}</div>
     <h3>{{user.name}}</h3>
     <h5>{{user.company}}</h5>
@@ -21,9 +21,10 @@
     	</thead>
     	<tbody>
     		<tr ng-repeat="repo in repos | orderBy: repoOrderBy">
-    			<td>{{repo.name}}</td>
+    			<td><a href="#/repo/{{user.login}}/{{repo.name}}">{{repo.name}}</a></td>
     			<td>{{repo.stargazers_count | number}}</td>
     			<td>{{repo.language}}</td>
     		</tr>
     	</tbody>
     </table>
+    <a href="#/main">Back to Search</a>
